@@ -4,9 +4,12 @@
 int main(int argc, char **argv) {
     QApplication app(argc, argv);
 
-    QPushButton button1("test");
-    QPushButton button2("other", &button1);
+    QWidget window;
+    window.setFixedSize(100, 50);
 
-    button1.show();
+    QPushButton * button = new QPushButton("Hello World", &window);
+    button->setGeometry(10, 10, 80, 30);
+
+    window.show();
     return app.exec();
 }
