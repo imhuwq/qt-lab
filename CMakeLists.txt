@@ -16,7 +16,6 @@ LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake")
 find_package(Gperftools REQUIRED)
 list(APPEND PRJ_INCLUDES ${GPERFTOOLS_INCLUDE_DIR})
 list(APPEND PRJ_LIBRARIES_DEBUG ${GPERFTOOLS_LIBRARIES})
-message(STATUS ${GPERFTOOLS_LIBRARIES})
 # ---------- for debug
 
 
@@ -57,7 +56,7 @@ list(APPEND PRJ_LIBRARIES ${Qt5Widgets_LIBRARIES})
 
 # set the sources ----------
 file(GLOB_RECURSE Sources "${CMAKE_CURRENT_SOURCE_DIR}/Sources/*.cpp")
-list(APPEND PRJ_SOURCES Sources)
+list(APPEND PRJ_SOURCES ${Sources})
 # ---------- set the sources
 
 
@@ -65,8 +64,15 @@ list(APPEND PRJ_SOURCES Sources)
 file(GLOB_RECURSE PlayGround "${CMAKE_CURRENT_SOURCE_DIR}/PlayGround/*.cpp")
 foreach (exec_source ${PlayGround})
     get_filename_component(exec_name ${exec_source} NAME_WE)
-    add_executable(${exec_name} ${exec_source})
+    add_executable(${exec_name} ${exec_source} ${PRJ_SOURCES})
     target_link_libraries(${exec_name} ${PRJ_LIBRARIES})
     target_link_libraries(${exec_name} debug ${PRJ_LIBRARIES})
 endforeach ()
 # ---------- build the playground executables
+
+
+# build the main ----------
+add_executable(main main.cpp ${PRJ_SOURCES})
+target_link_libraries(main ${PRJ_LIBRARIES})
+target_link_libraries(main debug ${PRJ_LIBRARIES})
+# ---------- build the main
