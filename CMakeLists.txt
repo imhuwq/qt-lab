@@ -4,6 +4,7 @@ project(qt-tutorial)
 set(CMAKE_CXX_STANDARD 11)
 
 # setup qt5 ----------
+# notice for developer: Qt5 must be installed in home directory
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(Qt5Dir "$ENV{HOME}/Qt/5.10.0")
 file(GLOB Qt5Modules "${Qt5Dir}/gcc_64/lib/cmake/*")
