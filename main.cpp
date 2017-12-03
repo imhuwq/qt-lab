@@ -1,7 +1,8 @@
 // For QtCreator
 
 #include "HelloWorld.h"
+#include "ParentingSystem.h"
 
 int main(int argc, char** argv) {
-    HelloWord(argc, argv);
+    return HelloWord(argc, argv);
 }

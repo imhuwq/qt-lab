@@ -1,4 +1,3 @@
-
 #include "HelloWorld.h"
 
 int HelloWord(int argc, char** argv) {
