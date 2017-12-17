@@ -23,5 +23,3 @@ void SlotSignalWindow::slotButtonClicked(bool checked) {
         emit signalCounterReached();
     }
 }
-
-#include "QO_Window.moc"
