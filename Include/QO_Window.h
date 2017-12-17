@@ -13,11 +13,16 @@ Q_OBJECT
 public:
     explicit SlotSignalWindow(QWidget *pParent = 0);
 
+signals:
+
+    void signalCounterReached();
+
 private slots:
 
     void slotButtonClicked(bool checked);
 
 private:
+    int mCounter = 0;
     QPushButton *mButton;
 };
 
