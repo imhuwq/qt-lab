@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.8)
 
 project(qt-tutorial)
+set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD 11)
 
 # things to be gathered ----------
@@ -57,6 +58,8 @@ list(APPEND PRJ_LIBRARIES ${Qt5Widgets_LIBRARIES})
 # set the sources ----------
 file(GLOB_RECURSE Sources "${CMAKE_CURRENT_SOURCE_DIR}/Sources/*.cpp")
 list(APPEND PRJ_SOURCES ${Sources})
+file(GLOB_RECURSE QT_Headers "${CMAKE_CURRENT_SOURCE_DIR}/Include/*QO_*.h")
+message(STATUS ${QT_Headers})
 # ---------- set the sources
 
 
@@ -64,7 +67,7 @@ list(APPEND PRJ_SOURCES ${Sources})
 file(GLOB_RECURSE PlayGround "${CMAKE_CURRENT_SOURCE_DIR}/PlayGround/*.cpp")
 foreach (exec_source ${PlayGround})
     get_filename_component(exec_name ${exec_source} NAME_WE)
-    add_executable(${exec_name} ${exec_source} ${PRJ_SOURCES})
+    add_executable(${exec_name} ${exec_source} ${PRJ_SOURCES} ${QT_Headers})
     target_link_libraries(${exec_name} ${PRJ_LIBRARIES})
     target_link_libraries(${exec_name} debug ${PRJ_LIBRARIES})
 endforeach ()
