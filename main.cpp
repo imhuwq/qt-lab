@@ -1,15 +1,18 @@
-// For QtCreator
+#include <QApplication>
+#include <QPushButton>
 
-#include "HelloWorld.h"
-#include "ParentingSystem.h"
-#include "RespondindEvents.h"
-#include "TransmittingInformation.h"
-#include "CustomSlotSignal.h"
+#include "qobjects/window.h"
 
-int main(int argc, char** argv) {
-    HelloWord(argc, argv);
-    ParentingSystem(argc, argv);
-    RespondingEvents(argc, argv);
-    TransmittingInformation(argc, argv);
-    CustomSlotSignal(argc, argv);
+int main(int argc, char **argv) {
+  QApplication app(argc, argv);
+
+  Window window;
+  window.setFixedSize(100, 50);
+
+  QPushButton button("button", &window);
+  button.setGeometry(10, 10, 80, 30);
+
+  window.show();
+
+  return app.exec();
 }

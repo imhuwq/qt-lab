@@ -41,7 +41,7 @@ find_package(Qt5Widgets)
 
 
 # set the include dirs ----------
-list(APPEND PRJ_INCLUDES "${CMAKE_CURRENT_SOURCE_DIR}/Include")
+list(APPEND PRJ_INCLUDES "${CMAKE_CURRENT_SOURCE_DIR}/include")
 list(APPEND PRJ_INCLUDES ${Qt5Core_INCLUDE_DIRS})
 list(APPEND PRJ_INCLUDES ${Qt5Widgets_INCLUDE_DIRS})
 list(REMOVE_DUPLICATES PRJ_INCLUDES)
@@ -56,26 +56,16 @@ list(APPEND PRJ_LIBRARIES ${Qt5Widgets_LIBRARIES})
 
 
 # set the sources ----------
-file(GLOB_RECURSE Sources "${CMAKE_CURRENT_SOURCE_DIR}/Sources/*.cpp")
+file(GLOB_RECURSE Sources "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
+file(GLOB_RECURSE QObjects "${CMAKE_CURRENT_SOURCE_DIR}/include/qobjects/*.h")
+list(APPEND PRJ_SOURCES ${QObjects})
 list(APPEND PRJ_SOURCES ${Sources})
-file(GLOB_RECURSE QT_Headers "${CMAKE_CURRENT_SOURCE_DIR}/Include/*QO_*.h")
-message(STATUS ${QT_Headers})
+message(STATUS ${PRJ_SOURCES})
 # ---------- set the sources
-
-
-# build the playground executables ----------
-file(GLOB_RECURSE PlayGround "${CMAKE_CURRENT_SOURCE_DIR}/PlayGround/*.cpp")
-foreach (exec_source ${PlayGround})
-    get_filename_component(exec_name ${exec_source} NAME_WE)
-    add_executable(${exec_name} ${exec_source} ${PRJ_SOURCES} ${QT_Headers})
-    target_link_libraries(${exec_name} ${PRJ_LIBRARIES})
-    target_link_libraries(${exec_name} debug ${PRJ_LIBRARIES})
-endforeach ()
-# ---------- build the playground executables
 
 
 # build the main ----------
 add_executable(main main.cpp ${PRJ_SOURCES})
 target_link_libraries(main ${PRJ_LIBRARIES})
-target_link_libraries(main debug ${PRJ_LIBRARIES})
+target_link_libraries(main debug ${PRJ_LIBRARIES_DEBUG})
 # ---------- build the main
